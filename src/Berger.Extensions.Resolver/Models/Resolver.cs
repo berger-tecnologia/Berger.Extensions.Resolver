@@ -3,11 +3,15 @@
     public class Resolver
     {
         #region Constructors
-        public Resolver(Type type, Type destination, string policy)
+        public Resolver(Type type, Type destination)
+        {
+            Type = type;
+            Destination = destination;
+        }
+        public Resolver(Type type, string policy)
         {
             Type = type;
             Policy = policy;
-            Destination = destination;
             ResolverType = ResolverType.GraphQL;
             OperationType = OperationType.Query;
         }
