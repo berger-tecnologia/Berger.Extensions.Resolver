@@ -1,9 +1,20 @@
-﻿namespace Berger.Extensions.Resolver
+﻿using Microsoft.Extensions.Configuration;
+
+namespace Berger.Extensions.Resolver
 {
-    public class ResolverService : IResolver
+    public class ResolverService : IResolverService
     {
         #region Properties
+        private readonly IConfiguration _configuration;
+        
         public List<Resolver> Resolvers = new List<Resolver>();
+        #endregion
+
+        #region Constructors
+        public ResolverService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         #endregion
 
         #region Methods
@@ -21,6 +32,12 @@
                 throw new Exception($"The resolver configuration for the type {type.GetType()} was not found.");
 
             return resolvers;
+        }
+        public string Resolve(string name)
+        {
+            string path = _configuration[$"Views:{name}"];
+
+            return !string.IsNullOrEmpty(path) ? path : name;
         }
         #endregion
     }
