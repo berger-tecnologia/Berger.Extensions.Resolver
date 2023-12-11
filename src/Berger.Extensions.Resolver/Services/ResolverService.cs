@@ -15,6 +15,9 @@ namespace Berger.Extensions.Resolver
         {
             _configuration = configuration;
         }
+        public ResolverService()
+        {
+        }
         #endregion
 
         #region Methods
